@@ -3,10 +3,12 @@
 import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_glow/flutter_glow.dart';
+import 'package:splash_music_app/models/playlistmodel.dart';
 import 'package:splash_music_app/models/songmodel.dart';
 import 'package:splash_music_app/widgets/section_header.dart';
 
 import '../widgets/SongCard.dart';
+import '../widgets/playlistcard.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -15,6 +17,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var name = 'Naman';
     List<Song> songs = Song.songs;
+    List<Playlist> playlists = Playlist.playlists;
     return Container(
       decoration: const BoxDecoration(
         gradient: LinearGradient(
@@ -32,17 +35,40 @@ class HomeScreen extends StatelessWidget {
             children: [
               _DiscoverMusic(name: name),
               _TrendingMusic(songs: songs),
-              const Padding(
-                padding: EdgeInsets.only(right: 1 + 20.0, left: 30.0),
-                child: Column(
-                  children: [
-                    SectionHeader(title: 'Playlist'),
-                  ],
-                ),
-              ),
+              _PlaylistMusic(playlists: playlists),
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class _PlaylistMusic extends StatelessWidget {
+  const _PlaylistMusic({
+    Key? key,
+    required this.playlists,
+  }) : super(key: key);
+
+  final List<Playlist> playlists;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(20.0),
+      child: Column(
+        children: [
+          const SectionHeader(title: 'Playlists'),
+          ListView.builder(
+            shrinkWrap: true,
+            padding: const EdgeInsets.only(top: 20),
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: playlists.length,
+            itemBuilder: ((context, index) {
+              return PlaylistCard(playlist: playlists[index]);
+            }),
+          ),
+        ],
       ),
     );
   }
@@ -141,7 +167,7 @@ class _CustomNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(right: 8.0, top: 8.0, left: 8.0),
+      padding: const EdgeInsets.only(right: 8.0, left: 8.0),
       child: Container(
         decoration: const BoxDecoration(
             borderRadius: BorderRadius.only(
