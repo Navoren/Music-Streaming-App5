@@ -214,8 +214,15 @@ class _CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       backgroundColor: Colors.transparent,
       elevation: 0,
-      leading: const Icon(
-        Icons.grid_view_outlined,
+      leading: const GlowIcon(
+        Icons.headphones_outlined,
+        glowColor: Colors.purple,
+        blurRadius: 9,
+        size: 30,
+      ),
+      title: const GlowText(
+        'K A N S O',
+        style: TextStyle(fontStyle: FontStyle.italic, fontSize: 30),
       ),
       actions: [
         Container(
