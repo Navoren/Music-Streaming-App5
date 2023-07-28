@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_glow/flutter_glow.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:splash/splash.dart';
+import 'package:splash_music_app/screens/splash.dart';
 
 import 'screens/home.dart';
 
@@ -24,9 +26,9 @@ class MyApp extends StatelessWidget {
               displayColor: Colors.white,
             ),
       ),
-      home: const HomeScreen(),
+      home: const Splash(),
       getPages: [
-        GetPage(name: '/', page: () => const HomeScreen()),
+        GetPage(name: '/', page: () => const Splash()),
         // GetPage(name: 'song', page: () => const SongScreen()),
         // GetPage(name: 'playlist', page: () => const PlaylistScreen()),
       ],
